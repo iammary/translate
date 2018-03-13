@@ -6,7 +6,7 @@ export const SCOPE = [ 'https://www.googleapis.com/auth/drive' ];
 
 // Folder location relative to current directory
 // export const LANGUAGE_FOLDER = '/newt/ti-portal-scb/app/assets/src/common/constants';
-export const LANGUAGE_FOLDER = '/translate/language';
+export const LANGUAGE_FOLDER = '/language';
 
 // Google Drive Document ID
 export const DOCUMENT_ID = process.env.TRANSLATE_FILE || `GOOGLE_DOCUMENT_ID`;

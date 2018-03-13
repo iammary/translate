@@ -14,14 +14,16 @@ import {
   authorizeEvent
 } from './auth';
 
-let location = path.join( __dirname, '../', LANGUAGE_FOLDER );
+const location  = path.join( __dirname, '../', LANGUAGE_FOLDER );
+const JSON_ONLY = process.argv[ 2 ] === 'json';
+const PAIRED    = process.argv[ 2 ] === 'jspair';
 
 authorizeEvent()
   .then( getLanguageLocation )
   .then( performDownload )
   .then( convertToJSON )
-  .then( generatePO )
-  .then( formatJSON )
+  .then( !(JSON_ONLY || PAIRED) && generatePO )
+  .then( PAIRED ? formatPairedJSON : formatJSON )
   .then( saveJSON );
 
 function getLanguageLocation ( auth ) {
@@ -145,6 +147,17 @@ function formatJSON ( translations ) {
     translations.map( ( translation ) => {
       let first_key                 = translation[ Object.keys( translation )[ 0 ] ];
       pretty_translate[ first_key ] = translation;
+    } );
+    resolve( pretty_translate );
+  } );
+}
+
+function formatPairedJSON ( translations ) {
+  return new Promise( ( resolve ) => {
+    let pretty_translate = {};
+    translations.map( ( translation ) => {
+      let first_key                 = translation[ Object.keys( translation )[ 0 ] ];
+      pretty_translate[ first_key ] = translation[ Object.keys( translation )[ 1 ] ];
     } );
     resolve( pretty_translate );
   } );
