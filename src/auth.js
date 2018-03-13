@@ -59,7 +59,6 @@ function authorize ( credentials, callback ) {
  *     client.
  */
 function getNewToken ( oauth2Client, callback ) {
-  console.log( 'test' );
   let authUrl = oauth2Client.generateAuthUrl( {
     access_type : 'offline',
     scope       : SCOPES
