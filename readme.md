@@ -18,7 +18,12 @@ Update config.js file for project settings.
 npm run lang
 ```
 
-### Generate PO and MO files of each languages with one **translation JSON**
+### Generate with one **translation JSON**
 ```
 npm run lang json
+```
+
+### Generate paired **translation JSON**
+```
+npm run lang jspair
 ```
